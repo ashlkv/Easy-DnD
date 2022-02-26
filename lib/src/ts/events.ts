@@ -13,12 +13,15 @@ export class DnDEvent {
 
 }
 
-export class ReorderEvent {
+export class ReorderEvent extends DnDEvent {
+    to: number;
+    from: number;
 
-    constructor(
-        public from: number,
-        public to: number
-    ) {
+    constructor(from: number, to: number, event?: DnDEvent) {
+        super();
+        Object.assign(this, event);
+        this.to = to;
+        this.from = from;
     }
 
     apply(array: any[]) {
@@ -29,13 +32,27 @@ export class ReorderEvent {
 
 }
 
-export class InsertEvent {
+export class InsertEvent extends DnDEvent {
+    type: any;
+    data: any;
+    index: number;
 
-    constructor(
-        public type: any,
-        public data: any,
-        public index: number
-    ) {
+    constructor(type: any, data: any, index: number, event?: DnDEvent) {
+        super();
+        Object.assign(this, event);
+        this.type = type;
+        this.data = data;
+        this.index = index;
     }
 
+}
+
+export class LeaveEvent extends DnDEvent {
+    index: number;
+
+    constructor(index: number, event?: DnDEvent) {
+        super();
+        Object.assign(this, event);
+        this.index = index;
+    }
 }

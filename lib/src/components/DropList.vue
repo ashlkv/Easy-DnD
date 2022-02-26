@@ -45,7 +45,7 @@ import {Component, Prop} from "vue-property-decorator";
 import DropMixin from "../mixins/DropMixin";
 import DragFeedback from "./DragFeedback.vue";
 import Grid from "../ts/Grid";
-import {DnDEvent, InsertEvent, ReorderEvent} from "../ts/events";
+import {DnDEvent, InsertEvent, ReorderEvent, LeaveEvent} from "../ts/events";
 import {createDragImage} from "../ts/createDragImage"
 import {dnd} from "../ts/DnD";
 
@@ -261,15 +261,19 @@ export default class DropList extends DropMixin {
             if (this.fromIndex !== this.closestIndex) {
                 this.$emit('reorder', new ReorderEvent(
                     this.fromIndex,
-                    this.closestIndex
+                    this.closestIndex,
+                    event,
                 ));
+            } else {
+                this.$emit('leave', new LeaveEvent(this.fromIndex, event));
             }
         } else {
             DropMixin['options'].methods.doDrop.call(this, event);
             this.$emit('insert', new InsertEvent(
                 event.type,
                 event.data,
-                this.closestIndex
+                this.closestIndex,
+                event,
             ));
         }
     }

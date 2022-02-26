@@ -8,7 +8,7 @@ import DropMixin from './mixins/DropMixin';
 import {dnd} from './ts/DnD';
 import {DragImagesManager} from './ts/DragImagesManager';
 import DropList from './components/DropList.vue';
-import {DnDEvent, InsertEvent, ReorderEvent} from './ts/events';
+import {DnDEvent, InsertEvent, ReorderEvent, LeaveEvent} from './ts/events';
 import {createDragImage} from './ts/createDragImage';
 
 export {
@@ -24,5 +24,6 @@ export {
     DnDEvent,
     InsertEvent,
     ReorderEvent,
+    LeaveEvent,
     createDragImage
 }
