@@ -1,8 +1,9 @@
 {
-  "name": "vue-easy-dnd",
+  "name": "@ashlkv/vue-easy-dnd",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "publish:npm": "npm publish ./lib --access public",
     "serve": "vue-cli-service serve",
     "build": "rollup --config ./lib/rollup.config.js --environment BUILD:production"
   },

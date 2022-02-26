@@ -1,7 +1,7 @@
 {
-  "name": "vue-easy-dnd",
+  "name": "@ashlkv/vue-easy-dnd",
   "version": "1.22.0",
-  "description": "Easy-DnD is a drag and drop implementation for Vue.js 2 that uses only standard mouse events instead of the HTML5 drag and drop API, which is [impossible to work with](https://www.quirksmode.org/blog/archives/2009/09/the_html5_drag.html). Think of it as a way to transfer data from some components to others using the mouse or support for a mouse assisted copy/cut - paste. It also allows for lists to be reordred by drag and drop.",
+  "description": "A fork of vue-easy-dnd: https://www.npmjs.com/package/vue-easy-dnd",
   "main": "./dist/vue-easy-dnd.ssr.js",
   "module": "./dist/vue-easy-dnd.esm.js",
   "browser": {
@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rlemaigre/Easy-DnD.git"
+    "url": "git+https://github.com/ashlkv/easy-dnd.git"
   },
   "keywords": [
     "vue",
@@ -42,5 +42,5 @@
   "bugs": {
     "url": "https://github.com/rlemaigre/Easy-DnD/issues"
   },
-  "homepage": "https://github.com/rlemaigre/Easy-DnD#readme"
+  "homepage": "https://github.com/ashlkv/easy-dnd#readme"
 }
