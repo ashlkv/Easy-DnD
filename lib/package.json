@@ -1,6 +1,6 @@
 {
   "name": "@ashlkv/vue-easy-dnd",
-  "version": "1.22.0",
+  "version": "1.22.1",
   "description": "A fork of vue-easy-dnd: https://www.npmjs.com/package/vue-easy-dnd",
   "main": "./dist/vue-easy-dnd.ssr.js",
   "module": "./dist/vue-easy-dnd.esm.js",

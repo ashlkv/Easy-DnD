@@ -43,7 +43,7 @@ export default class DropList extends DropMixin {
     get showReorderingDragImage(): boolean;
     doDrop(event: DnDEvent): void;
     candidate(type: any, data: any, source: any): boolean;
-    computeForbiddenKeys(): (string | number)[];
+    computeForbiddenKeys(): (string | number | boolean | symbol)[];
     computeFeedbackKey(): any;
     get hasReorderingFeedback(): boolean;
     computeInsertingGrid(): Grid;

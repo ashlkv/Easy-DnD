@@ -12,15 +12,19 @@ export declare class DnDEvent {
     success: Boolean;
     native: TouchEvent | MouseEvent;
 }
-export declare class ReorderEvent {
-    from: number;
+export declare class ReorderEvent extends DnDEvent {
     to: number;
-    constructor(from: number, to: number);
+    from: number;
+    constructor(from: number, to: number, event?: DnDEvent);
     apply(array: any[]): void;
 }
-export declare class InsertEvent {
+export declare class InsertEvent extends DnDEvent {
     type: any;
     data: any;
     index: number;
-    constructor(type: any, data: any, index: number);
+    constructor(type: any, data: any, index: number, event?: DnDEvent);
+}
+export declare class LeaveEvent extends DnDEvent {
+    index: number;
+    constructor(index: number, event?: DnDEvent);
 }
