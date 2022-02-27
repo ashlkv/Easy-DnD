@@ -8,6 +8,7 @@ export default class Grid {
         x: any;
         y: any;
     }[];
+    horizontal: boolean;
     constructor(collection: HTMLCollection, upToIndex: number, row: string, fromIndex: number);
     /**
      * Returns the center of the rectangle.
