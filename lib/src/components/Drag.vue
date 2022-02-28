@@ -15,7 +15,13 @@
 import {Component, Prop} from "vue-property-decorator";
 import DragMixin from "../mixins/DragMixin";
 
-@Component({})
+@Component({
+    /**
+     * inheritAttrs: false prevents prop values of a tag component from becoming html attributes, e.g.: <div options="[Object],[Object]">
+     * if using Drag with a tag prop: <Drag tag="Component">.
+     */
+    inheritAttrs: false
+})
 export default class Drag extends DragMixin {
 
     /**
