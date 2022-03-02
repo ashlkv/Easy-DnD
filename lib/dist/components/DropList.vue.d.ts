@@ -23,7 +23,7 @@ export default class DropList extends DropMixin {
     };
     get rootListeners(): Record<string, Function | Function[]>;
     created(): void;
-    get direction(): "row" | "column" | "auto";
+    get direction(): "both" | "row" | "column" | "auto";
     beforeDestroy(): void;
     refresh(): void;
     onDragStart(event: DnDEvent): void;

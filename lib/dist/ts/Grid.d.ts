@@ -8,8 +8,8 @@ export default class Grid {
         x: any;
         y: any;
     }[];
-    horizontal: boolean;
-    constructor(collection: HTMLCollection, upToIndex: number, row: string, fromIndex: number);
+    direction: 'row' | 'column' | 'both' | 'auto';
+    constructor(collection: HTMLCollection, upToIndex: number, direction: 'row' | 'column' | 'both' | 'auto', fromIndex: number);
     /**
      * Returns the center of the rectangle.
      */
