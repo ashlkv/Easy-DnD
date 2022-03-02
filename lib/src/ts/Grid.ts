@@ -3,19 +3,20 @@ export default class Grid {
     reference: HTMLElement;
     referenceOriginalPosition: { x, y };
     magnets: { x, y }[] = [];
-    horizontal: boolean;
+    direction: 'row' | 'column' | 'both' | 'auto';
 
-    constructor(collection: HTMLCollection, upToIndex: number, row: string, fromIndex: number) {
+    constructor(collection: HTMLCollection, upToIndex: number, direction: 'row' | 'column' | 'both' | 'auto', fromIndex: number) {
         this.reference = collection.item(0).parentNode as HTMLElement;
         this.referenceOriginalPosition = {
             x: this.reference.getBoundingClientRect().left - this.reference.scrollLeft,
             y: this.reference.getBoundingClientRect().top - this.reference.scrollTop,
         };
-        if (row === 'auto') {
+        if (direction === 'auto') {
             // Auto mode not supported for now. Row or column must be defined explicitly if there are nested drop lists.
             throw new Error("Easy-DnD error : a drop list is missing one of these attributes : 'row' or 'column'.");
         }
-        this.horizontal = row === 'row';
+        this.direction = direction;
+        const isHorizontal = direction === 'row';
         let index = 0;
         for (let child of collection) {
             if (index > upToIndex) break;
@@ -23,12 +24,12 @@ export default class Grid {
             let hasNestedDrop = child.classList.contains("dnd-drop") || child.getElementsByClassName("dnd-drop").length > 0;
             if (fromIndex === null) {
                 // Inserting mode.
-                this.magnets.push(hasNestedDrop ? this.before(rect, this.horizontal) : this.center(rect));
+                this.magnets.push(hasNestedDrop ? this.before(rect, isHorizontal) : this.center(rect));
             } else {
                 // Reordering mode.
                 this.magnets.push(hasNestedDrop ? (
                     fromIndex < index ? this.after : this.before
-                )(rect, this.horizontal) : this.center(rect));
+                )(rect, isHorizontal) : this.center(rect));
             }
             // Debug : show magnets :
             //document.body.insertAdjacentHTML("beforeend", "<div style='background-color: red; position: fixed; width: 1px; height: 1px; top:" + this.magnets[index].y + "px; left:" + this.magnets[index].x + "px;' ></div>")
@@ -89,9 +90,13 @@ export default class Grid {
         let y = position.y - this.correction().y;
         let minDist = 999999;
         let index = -1;
+        const isHorizontal = this.direction === 'row';
+        const is2d = this.direction === 'both';
         for (let i = 0; i < this.magnets.length; i++) {
             let magnet = this.magnets[i];
-            let dist = this.horizontal ? Math.abs(magnet.x - x) : Math.abs(magnet.y - y);
+            let dist = is2d
+                ? Math.sqrt(Math.pow(magnet.x - x, 2) + Math.pow(magnet.y - y, 2))
+                : isHorizontal ? Math.abs(magnet.x - x) : Math.abs(magnet.y - y);
             if (dist < minDist) {
                 minDist = dist;
                 index = i;

@@ -112,6 +112,7 @@ export default class DropList extends DropMixin {
     }
 
     get direction() {
+        if (this.row && this.column) return 'both'
         if (this.row) return 'row';
         if (this.column) return 'column';
         return 'auto';
