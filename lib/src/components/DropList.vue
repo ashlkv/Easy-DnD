@@ -5,7 +5,7 @@
                 <template v-if="hasReorderingFeedback">
                     <slot name="item" v-for="(item, index) in itemsBeforeReorderingFeedback" :item="item"
                         :index="index" />
-                    <slot name="reordering-feedback" :item="items[fromIndex]"/>
+                    <slot name="reordering-feedback" :item="items[fromIndex]" :index="itemsBeforeReorderingFeedback.length - 1"/>
                     <slot name="item" v-for="(item, index) in itemsAfterReorderingFeedback" :item="item"
                         :index="itemsBeforeReorderingFeedback.length + index" />
                 </template>
@@ -18,7 +18,7 @@
             <template v-else>
                 <slot name="item" v-for="(item, index) in itemsBeforeFeedback" :item="item" :reorder="false"
                      :index="index"/>
-                <slot name="feedback" :data="dragData" :type="dragType"/>
+                <slot name="feedback" :data="dragData" :type="dragType" :index="itemsBeforeFeedback.length - 1"/>
                 <slot name="item" v-for="(item, index) in itemsAfterFeedback" :item="item" :reorder="false"
                      :index="itemsBeforeFeedback.length + index"/>
             </template>
@@ -31,10 +31,10 @@
             <slot name="feedback" :data="dragData" :type="dragType"/>
         </drag-feedback>
         <div class="__drag-image" v-if="showInsertingDragImage" ref="drag-image" key="inserting-drag-image">
-            <slot name="drag-image" :type="dragType" :data="dragData"/>
+            <slot name="drag-image" :type="dragType" :data="dragData" :index="itemsBeforeFeedback.length - 1"/>
         </div>
         <div class="__drag-image" v-if="showReorderingDragImage" ref="drag-image" key="reordering-drag-image">
-            <slot name="reordering-drag-image" :item="items[fromIndex]"/>
+            <slot name="reordering-drag-image" :item="items[fromIndex]" :index="itemsBeforeReorderingFeedback.length - 1" />
         </div>
         <slot />
     </component>
